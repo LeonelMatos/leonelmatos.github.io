@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonel Matos - Blog Posts</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a; /* Almost black */
+            color: #e0e0e0; /* Light gray text */
+        }
+        .container-shadow {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+        }
+        .section-heading {
+            color: #8c8c8c; /* Slightly darker gray for section headings */
+        }
+        .blog-card {
+            background-color: #2a2a2a; /* Slightly lighter dark background for cards */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+        .pastel-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 9999px; /* Full rounded for pill shape */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            color: #1a1a1a; /* Dark text for pastel background */
+        }
+        /* Pastel colors for tags */
+        .tag-blue { background-color: #a7d9f7; } /* Light Blue */
+        .tag-green { background-color: #b7e4c7; } /* Light Green */
+        .tag-pink { background-color: #f7b7cf; } /* Light Pink */
+        .tag-yellow { background-color: #ffe6a7; } /* Light Yellow */
+        .tag-purple { background-color: #d1c4e9; } /* Light Purple */
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-4xl bg-gray-900 rounded-lg container-shadow p-6 md:p-8 lg:p-10">
+        <!-- Header (can be a simplified version or a back link) -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2">
+                Blog Posts
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400">
+                Insights, thoughts, and technical ramblings.
+            </p>
+            <!-- Basic navigation back to home -->
+            <nav class="mt-6">
+                <a href="index.html" class="menu-item inline-block text-base md:text-lg px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-md transition-colors duration-200">
+                    &lt; Back to Home
+                </a>
+            </nav>
+        </header>
+
+        <!-- Blog Posts Section -->
+        <section class="mt-10">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 section-heading">
+                // Latest Articles
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+                <!-- NEW_BLOG_POST_INSERTION_POINT -->
+
+                <!-- Blog Post Card 1 (Example, will be shifted down by new posts) -->
+                <div class="blog-card rounded-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">The Future of Web Development</h3>
+                        <p class="text-gray-400 text-sm mb-3">Published on: October 26, 2023</p>
+                        <p class="text-gray-300 mb-4 text-base">
+                            Exploring the emerging trends and technologies shaping the landscape of web development, from AI-powered tools to serverless architectures.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-2">
+                            <span class="pastel-tag tag-blue">Web Dev</span>
+                            <span class="pastel-tag tag-green">AI</span>
+                            <span class="pastel-tag tag-yellow">Trends</span>
+                        </div>
+                        <a href="#" class="text-blue-400 hover:underline text-sm font-medium">Read More &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post Card 2 -->
+                <div class="blog-card rounded-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Understanding Asynchronous JavaScript</h3>
+                        <p class="text-gray-400 text-sm mb-3">Published on: September 15, 2023</p>
+                        <p class="text-gray-300 mb-4 text-base">
+                            A deep dive into promises, async/await, and callbacks, demystifying the core concepts of non-blocking operations in JavaScript.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-2">
+                            <span class="pastel-tag tag-green">JavaScript</span>
+                            <span class="pastel-tag tag-purple">Programming</span>
+                        </div>
+                        <a href="#" class="text-blue-400 hover:underline text-sm font-medium">Read More &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post Card 3 -->
+                <div class="blog-card rounded-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Building Responsive Layouts with Tailwind CSS</h3>
+                        <p class="text-gray-400 text-sm mb-3">Published on: August 01, 2023</p>
+                        <p class="text-gray-300 mb-4 text-base">
+                            A practical guide to leveraging Tailwind CSS utility classes to create beautiful, adaptive designs for all screen sizes.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-2">
+                            <span class="pastel-tag tag-pink">CSS</span>
+                            <span class="pastel-tag tag-blue">Design</span>
+                            <span class="pastel-tag tag-green">Tailwind CSS</span>
+                        </div>
+                        <a href="#" class="text-blue-400 hover:underline text-sm font-medium">Read More &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post Card 4 -->
+                <div class="blog-card rounded-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">My Journey into Open Source</h3>
+                        <p class="text-gray-400 text-sm mb-3">Published on: July 10, 2023</p>
+                        <p class="text-300 mb-4 text-base">
+                            Sharing my experiences and tips for getting started with contributing to open-source projects, and why it matters.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-2">
+                            <span class="pastel-tag tag-yellow">Community</span>
+                            <span class="pastel-tag tag-purple">Open Source</span>
+                        </div>
+                        <a href="#" class="text-blue-400 hover:underline text-sm font-medium">Read More &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
