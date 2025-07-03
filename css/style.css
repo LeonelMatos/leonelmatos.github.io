@@ -5,3 +5,24 @@ html, body {
   font-family: 'Inter', sans-serif;
   overscroll-behavior-y: none;
 }
+
+/* Dark Mode Toggle Styles */
+#darkModeToggle {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#darkModeToggle:hover {
+    transform: scale(1.1);
+}
+
+#darkModeToggle:active {
+    transform: scale(0.95);
+}
+
+#themeIcon svg {
+    transition: transform 0.3s ease;
+}
+
+#darkModeToggle:hover #themeIcon svg {
+    transform: rotate(15deg);
+}
