@@ -1,0 +1,11 @@
+# Logs
+logs
+*.log
+
+
+# Editor directories and files
+.DS_Store
+.env
+.env.local
+.vscode
+

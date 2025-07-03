@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leonel Matos</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      corePlugins: {
+        preflight: false
+      },
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            neutral: {
+              50: '#fafafa',
+              100: '#f5f5f5',
+              200: '#e5e5e5',
+              300: '#d4d4d4',
+              400: '#a3a3a3',
+              500: '#737373',
+              600: '#525252',
+              700: '#404040',
+              800: '#262626',
+              900: '#171717',
+              950: '#0a0a0a',
+            },
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="font-inter antialiased bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50">
+  <div id="app" class="min-h-screen rounded-lg p-4 sm:p-6 md:p-8 max-w-6xl mx-auto">
+    <!-- Dark Mode Toggle -->
+    <div id="darkModeToggleContainer" class="fixed top-4 right-4 z-50">
+      <button id="darkModeToggle"
+        class="p-2 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-opacity-50"
+        aria-label="Toggle dark mode">
+        <!-- Icons will be injected by JavaScript -->
+      </button>
+    </div>
+    <div id="userIdDisplay" class="fixed top-4 left-4 z-50 bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs px-3 py-1 rounded-full shadow-md hidden">
+        User ID: <span id="currentUserId"></span>
+    </div>
+    
+    <!-- Header -->
+    <div id="headerContainer"></div>
+    
+    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 rounded-lg">
+      <!-- Navigation -->
+      <div id="navigationContainer" class="md:col-span-1 p-6 bg-neutral-100 dark:bg-neutral-800 rounded-lg shadow-sm h-fit sticky top-8"></div>
+      
+      <!-- Content Sections -->
+      <div class="md:col-span-3 space-y-8">
+        <div id="blogContainer"></div>
+        <div id="projectsContainer"></div>
+        <div id="moviesContainer"></div>
+        <div id="toolsContainer"></div>
+        <div id="bookmarksContainer"></div>
+      </div>
+    </main>
+    
+    <!-- Footer -->
+    <div id="footerContainer"></div>
+  </div>
+
+  <!-- JavaScript files -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
