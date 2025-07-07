@@ -1,5 +1,6 @@
 // Import components
 import { renderHeader } from './components/ui/header.js';
+import { renderTopNavigation } from './components/ui/top-navigation.js';
 import { renderNavigation } from './components/ui/navigation.js';
 import { renderBlogSection } from './components/sections/blog.js';
 import { renderProjectsSection } from './components/sections/projects.js';
@@ -27,7 +28,11 @@ const renderUI = () => {
     if (elements.blogContainer) elements.blogContainer.innerHTML = renderBlogSection();
     if (elements.projectsContainer) elements.projectsContainer.innerHTML = renderProjectsSection();
     if (elements.footerContainer) elements.footerContainer.innerHTML = renderFooter();
-    
+    if (elements.headerContainer) { 
+        elements.headerContainer.innerHTML = renderHeader();
+        const topNavContainer = document.getElementById('topNavigationContainer');
+        if (topNavContainer) topNavContainer.innerHTML = renderTopNavigation();
+    }
     // Initialize other sections with placeholders
     if (elements.moviesContainer) elements.moviesContainer.innerHTML = "<!-- Movie section content -->";
     if (elements.toolsContainer) elements.toolsContainer.innerHTML = "<!-- Tools section content -->";

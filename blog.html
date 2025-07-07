@@ -8,6 +8,8 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/blog-cards.css">
+  <link rel="preconnect" href="https://images.unsplash.com">
   <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
@@ -42,6 +44,7 @@
 </head>
 <body class="font-inter antialiased bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50">
   <div id="app" class="min-h-screen rounded-lg p-4 sm:p-6 md:p-8 max-w-6xl mx-auto">
+    <div id="app" class="min-h-screen rounded-lg p-4 sm:p-6 md:p-8 max-w-6xl mx-auto">
     <!-- Dark Mode Toggle -->
     <div id="darkModeToggleContainer" class="fixed top-4 right-4 z-50">
       <button id="darkModeToggle"
@@ -50,32 +53,41 @@
         <!-- Icons will be injected by JavaScript -->
       </button>
     </div>
-    <div id="userIdDisplay" class="fixed top-4 left-4 z-50 bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs px-3 py-1 rounded-full shadow-md hidden">
-        User ID: <span id="currentUserId"></span>
-    </div>
-    
-    <!-- Header -->
     <div id="headerContainer"></div>
     
-    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 rounded-lg">
-      <!-- Navigation -->
-      <div id="navigationContainer" class="md:col-span-1 p-6 bg-neutral-100 dark:bg-neutral-800 rounded-lg shadow-sm h-fit sticky top-8"></div>
-      
-      <!-- Content Sections -->
-      <div class="md:col-span-3 space-y-8">
-        <div id="blogContainer"></div>
-        <div id="projectsContainer"></div>
-        <div id="moviesContainer"></div>
-        <div id="toolsContainer"></div>
-        <div id="bookmarksContainer"></div>
-      </div>
+    <main class="max-w-4xl mx-auto">
+      <h1 class="text-3xl font-bold mb-8 text-center">Blog Posts</h1>
+      <div id="blogPostsContainer" class="space-y-8"></div>
     </main>
     
     <!-- Footer -->
     <div id="footerContainer"></div>
   </div>
 
-  <!-- JavaScript files -->
-  <script type="module" src="js/app.js"></script>
+  <script type="module">
+    import { renderHeader } from './js/components/ui/header.js';
+    import { renderTopNavigation } from './js/components/ui/top-navigation.js';
+    import { renderFooter } from './js/components/ui/footer.js';
+    import { renderBlogPosts } from './js/components/sections/blog.js';
+    import './js/darkmode.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Render header and navigation
+      const headerContainer = document.getElementById('headerContainer');
+      if (headerContainer) {
+        headerContainer.innerHTML = renderHeader();
+        const topNavContainer = document.getElementById('topNavigationContainer');
+        if (topNavContainer) topNavContainer.innerHTML = renderTopNavigation();
+      }
+      
+      // Render blog posts
+      const blogContainer = document.getElementById('blogPostsContainer');
+      if (blogContainer) blogContainer.innerHTML = renderBlogPosts();
+      
+      // Render footer
+      const footerContainer = document.getElementById('footerContainer');
+      if (footerContainer) footerContainer.innerHTML = renderFooter();
+    });
+  </script>
 </body>
 </html>

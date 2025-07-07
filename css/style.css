@@ -26,3 +26,30 @@ html, body {
 #darkModeToggle:hover #themeIcon svg {
     transform: rotate(15deg);
 }
+
+/* Top Navigation */
+#topNavigationContainer nav {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+#topNavigationContainer nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sticky navigation */
+@media (min-width: 768px) {
+  #navigationContainer {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+  }
+}
+
+/* Homepage grid adjustment */
+@media (min-width: 768px) {
+  main.grid-cols-1.md\:grid-cols-4 {
+    grid-template-columns: 1fr 3fr;
+  }
+}
