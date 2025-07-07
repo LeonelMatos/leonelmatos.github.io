@@ -6,6 +6,28 @@ html, body {
   overscroll-behavior-y: none;
 }
 
+#headerContainer {
+  padding-top: 1rem;
+}
+
+/* Adjust top spacing for fixed elements */
+#darkModeToggleContainer {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  #headerContainer {
+    padding-top: 2rem;
+  }
+  
+  #darkModeToggleContainer {
+    top: 2rem;
+    right: 2rem;
+  }
+}
+
 /* Dark Mode Toggle Styles */
 #darkModeToggle {
     transition: background-color 0.3s ease, transform 0.2s ease;

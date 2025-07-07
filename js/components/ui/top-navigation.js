@@ -6,8 +6,8 @@ export const renderTopNavigation = () => {
         <a href="blog.html" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Blog</a>
         <a href="#projects" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Projects</a>
         <a href="#movies" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Movies</a>
-        <a href="#bookmarks" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Bookmarks</a>
-        <a href="#about" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">About</a>
+        <a href="#tools" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Tools</a>
+        <a href="#music" class="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Music</a>
       </div>
     </nav>
   `;

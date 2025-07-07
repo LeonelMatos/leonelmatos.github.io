@@ -1,6 +1,6 @@
 export const renderHeader = () => {
   return `
-    <header class="max-w-4xl mx-auto py-8 text-center rounded-lg mb-4">
+    <header class="max-w-4xl mx-auto text-center rounded-lg mb-4">
       <h1 class="text-4xl sm:text-5xl font-bold mb-2 text-neutral-900 dark:text-neutral-50">Leonel Matos</h1>
       <p class="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300">
         Computer Science Student | Aspiring Game Developer | Good Listener
