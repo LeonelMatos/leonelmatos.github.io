@@ -49,26 +49,79 @@
       <button id="darkModeToggle"
         class="p-2 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-opacity-50"
         aria-label="Toggle dark mode">
-        <!-- Icons will be injected by JavaScript -->
       </button>
     </div>
+    <!-- Header-->
     <div id="headerContainer"></div>
     
     <main class="max-w-4xl mx-auto">
-      <h1 class="text-3xl font-bold mb-8 text-center">Blog Posts</h1>
-      <div id="blogPostsContainer" class="space-y-8"></div>
+      <div class="p-6 bg-neutral-100 dark:bg-neutral-800 rounded-lg shadow-sm">
+        <h1 class="text-3xl font-bold mb-6 text-neutral-900 dark:text-neutral-50">Blog Posts</h1>
+        <div id="blogPostsContainer"></div>
+      </div>
     </main>
     
     <!-- Footer -->
     <div id="footerContainer"></div>
   </div>
 
+  <div id="fullPostContainer" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/50 backdrop-blur-sm"></div>
+
   <script type="module">
     import { renderHeader } from './js/components/ui/header.js';
     import { renderTopNavigation } from './js/components/ui/top-navigation.js';
     import { renderFooter } from './js/components/ui/footer.js';
-    import { renderBlogPosts } from './js/components/sections/blog.js';
+    import { renderBlogList, renderFullPost } from './js/components/sections/blog.js';
     import './js/darkmode.js';
+
+    // Function to hide full post view
+    function hideFullPost() {
+      const container = document.getElementById('fullPostContainer');
+      container.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    // Handle post navigation
+    function initBlogNavigation() {
+      // Handle card clicks
+      document.querySelectorAll('.blog-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const postId = card.dataset.id;
+          showFullPost(postId);
+        });
+      });
+    }
+    
+    // Show full post view
+    function showFullPost(postId) {
+      const container = document.getElementById('fullPostContainer');
+      if (!container) return;
+      
+      container.innerHTML = renderFullPost(postId);
+      container.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      
+      // Add back button event
+      document.getElementById('back-to-posts').addEventListener('click', hideFullPost);
+
+      // Add click outside to close functionality
+      const postCard = container.querySelector('.post-card');
+      container.addEventListener('click', (e) => {
+        // Check if click is outside the post card
+        if (postCard && !postCard.contains(e.target)) {
+          hideFullPost();
+        }
+      });
+    }
+
+    // Show post list view
+    function showPostList() {
+      const container = document.getElementById('blogPostsContainer');
+      if (!container) return;
+      
+      container.innerHTML = renderBlogList();
+      initBlogNavigation();
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
       // Render header and navigation
@@ -79,9 +132,8 @@
         if (topNavContainer) topNavContainer.innerHTML = renderTopNavigation();
       }
       
-      // Render blog posts
-      const blogContainer = document.getElementById('blogPostsContainer');
-      if (blogContainer) blogContainer.innerHTML = renderBlogPosts();
+      // Render blog content
+      showPostList();
       
       // Render footer
       const footerContainer = document.getElementById('footerContainer');

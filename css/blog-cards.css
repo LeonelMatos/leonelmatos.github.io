@@ -1,54 +1,100 @@
-/* Thin card styling */
+/* Blog card styling */
+.blog-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Line clamping for text */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Full post styling */
+.full-post {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Constrained content width */
+.full-post-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Prose content styling */
 .prose {
-  max-width: 100%;
   line-height: 1.6;
 }
 
 .prose p {
   margin-bottom: 1rem;
-  font-size: 0.95rem;
-}
-
-/* Image hover effect */
-.group:hover img {
-  transform: scale(1.05);
-}
-
-/* Tag styling */
-.tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 9999px;
+  font-size: 1rem;
   color: #4b5563;
 }
 
-.dark .tag {
-  background-color: rgba(255, 255, 255, 0.1);
+.dark .prose p {
   color: #d1d5db;
 }
 
-/* Card content spacing */
-.blog-card-content {
-  padding: 1.5rem;
+.prose h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
-.blog-card-content h3 {
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  font-size: 1.125rem;
-  line-height: 1.3;
+.prose img {
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .blog-card-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .blog-card > div {
+    flex-direction: column;
   }
   
-  .blog-card-content {
-    padding: 1.25rem;
+  .blog-card img {
+    width: 100% !important;
+    height: 200px;
   }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#fullPostContainer {
+  z-index: 100;
+  animation: fadeIn 0.3s ease-out;
+}
+
+#back-to-posts {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none !important;
+}
+
+#back-to-posts:hover {
+  text-decoration: underline;
 }
