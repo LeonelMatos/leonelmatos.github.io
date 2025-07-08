@@ -6,7 +6,7 @@ const blogPosts = [
     date: "June 15, 2025",
     tags: ["linux", "emulation", "picosystem"],
     category: "GameDev Tools",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=300&q=80"
+    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/post3-banner.png"
   },
   {
     id: 2,
