@@ -112,6 +112,12 @@
           hideFullPost();
         }
       });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !container.classList.contains('hidden')) {
+          hideFullPost();
+        }
+      })
+      
     }
 
     // Show post list view
