@@ -1,4 +1,5 @@
 // Import components
+import BlogController from './controllers/blogController.js';
 import { renderHeader } from './components/ui/header.js';
 import { renderTopNavigation } from './components/ui/top-navigation.js';
 import { renderNavigation } from './components/ui/navigation.js';
@@ -37,6 +38,8 @@ const renderUI = () => {
     if (elements.moviesContainer) elements.moviesContainer.innerHTML = "<!-- Movie section content -->";
     if (elements.toolsContainer) elements.toolsContainer.innerHTML = "<!-- Tools section content -->";
     if (elements.bookmarksContainer) elements.bookmarksContainer.innerHTML = "<!-- Bookmarks section content -->";
+
+    new BlogController();
 };
 
 // Initialize the app

@@ -87,7 +87,7 @@ export const renderBlogSection = () => {
   const recentPosts = blogPosts.slice(0, 3);
   
   return `
-    <section id="blog" class="">
+    <section id="blog">
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">Latest Blogposts</h2>
         <a href="blog.html" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
@@ -97,7 +97,10 @@ export const renderBlogSection = () => {
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         ${recentPosts.map(post => `
-          <article class="group bg-white dark:bg-neutral-800 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <article 
+            class="blog-preview-card group bg-white dark:bg-neutral-800 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            data-id="${post.id}"
+          >
             <div class="h-40 overflow-hidden">
               <img 
                 src="${post.image}" 
@@ -117,12 +120,9 @@ export const renderBlogSection = () => {
               </p>
               <div class="flex justify-between items-center">
                 <span class="text-xs text-neutral-500 dark:text-neutral-400">${post.date}</span>
-                <a 
-                  href="blog.html#post-${post.id}" 
-                  class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
-                >
+                <span class="text-xs font-medium text-blue-600 dark:text-blue-400">
                   Read more
-                </a>
+                </span>
               </div>
             </div>
           </article>
@@ -201,7 +201,7 @@ export const renderFullPost = (postId) => {
             id="back-to-posts"
             class="font-mono text-sm text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300"
           >
-            ← All posts
+            ← All posts [Esc]
           </button>
         </div>
         

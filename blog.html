@@ -65,69 +65,13 @@
     <div id="footerContainer"></div>
   </div>
 
-  <div id="fullPostContainer" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/50 backdrop-blur-sm"></div>
-
   <script type="module">
     import { renderHeader } from './js/components/ui/header.js';
     import { renderTopNavigation } from './js/components/ui/top-navigation.js';
     import { renderFooter } from './js/components/ui/footer.js';
-    import { renderBlogList, renderFullPost } from './js/components/sections/blog.js';
+    import { renderBlogList } from './js/components/sections/blog.js';
+    import BlogController from './js/controllers/blogController.js';
     import './js/darkmode.js';
-
-    // Function to hide full post view
-    function hideFullPost() {
-      const container = document.getElementById('fullPostContainer');
-      container.classList.add('hidden');
-      document.body.classList.remove('overflow-hidden');
-    }
-
-    // Handle post navigation
-    function initBlogNavigation() {
-      // Handle card clicks
-      document.querySelectorAll('.blog-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const postId = card.dataset.id;
-          showFullPost(postId);
-        });
-      });
-    }
-    
-    // Show full post view
-    function showFullPost(postId) {
-      const container = document.getElementById('fullPostContainer');
-      if (!container) return;
-      
-      container.innerHTML = renderFullPost(postId);
-      container.classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-      
-      // Add back button event
-      document.getElementById('back-to-posts').addEventListener('click', hideFullPost);
-
-      // Add click outside to close functionality
-      const postCard = container.querySelector('.post-card');
-      container.addEventListener('click', (e) => {
-        // Check if click is outside the post card
-        if (postCard && !postCard.contains(e.target)) {
-          hideFullPost();
-        }
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !container.classList.contains('hidden')) {
-          hideFullPost();
-        }
-      })
-      
-    }
-
-    // Show post list view
-    function showPostList() {
-      const container = document.getElementById('blogPostsContainer');
-      if (!container) return;
-      
-      container.innerHTML = renderBlogList();
-      initBlogNavigation();
-    }
 
     document.addEventListener('DOMContentLoaded', () => {
       // Render header and navigation
@@ -138,13 +82,20 @@
         if (topNavContainer) topNavContainer.innerHTML = renderTopNavigation();
       }
       
-      // Render blog content
-      showPostList();
+      // Render blog list
+      const blogPostsContainer = document.getElementById('blogPostsContainer');
+      if (blogPostsContainer) {
+        blogPostsContainer.innerHTML = renderBlogList();
+      }
       
       // Render footer
       const footerContainer = document.getElementById('footerContainer');
       if (footerContainer) footerContainer.innerHTML = renderFooter();
+      
+      //handles all post interactions
+      new BlogController();
     });
   </script>
+  <div id="fullPostContainer" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/50 backdrop-blur-sm"></div>
 </body>
 </html>
