@@ -25,17 +25,27 @@ const blogPosts = [
     date: "June 8, 2025",
     tags: ["gamedev", "unity", "3d"],
     category: "GameDev Projects",
-    image: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=300&q=80",
+    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/webp/roadside_banner.webp",
     content: `<p>Full content would go here...</p>`
   },
   {
     id: 3,
+    title: "Watched Movies",
+    excerpt: "A list of all movies I've watched since 2022. Including tags and rating",
+    date: "July 13, 2025",
+    tags: ["movies", "list", "shows"],
+    category: "GameDev Tools",
+    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/webp/movies_banner.webp",
+    content: `<p>Full content would go here...</p>`
+  },
+  {
+    id: 4,
     title: "My Essential Tool Stack for Game Development",
     excerpt: "A curated list of tools that accelerate my development workflow and boost productivity",
     date: "June 1, 2025",
     tags: ["tools", "workflow", "productivity"],
     category: "GameDev Tools",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=300&q=80",
+    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/webp/resources_banner.webp",
     content: `<p>Full content would go here...</p>`
   }
 ];
