@@ -8,4 +8,4 @@ logs
 .env.local
 .vscode
 
-local
+private
