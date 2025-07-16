@@ -10,15 +10,37 @@ import markdown
 from datetime import datetime
 from pathlib import Path
 from bs4 import BeautifulSoup
+import hashlib
+from urllib.parse import urlparse
+from dotenv import load_dotenv # type: ignore
+import sys
+
+load_dotenv()
+
+env_vars = [
+    'BLOG_POSTS_DIR',
+    'LOCAL_WEBP_DIR',
+    'OUTPUT_FILE',
+    'R2_BUCKET',
+    'R2_PREFIX',
+    'R2_ACCOUNT_ID'
+]
+
+missing_vars = [var for var in env_vars if not os.getenv(var)]
+if missing_vars:
+    print(f"Error: Missing required variables: {', '.join(missing_vars)}")
+    sys.exit(1)
 
 #Config
-BLOG_POSTS_DIR = Path('../blogposts')
-LOCAL_WEBP_DIR = Path('../webp')
-OUTPUT_FILE = Path('../js/data/posts.json')
-R2_BUCKET = 'personal-website'
-R2_PREFIX = 'posts/images/'
-R2_BASE_URL = f'https://b0eeab2e232796c6fcb1b206b8e77653.r2.cloudflarestorage.com/{R2_BUCKET}/{R2_PREFIX}'
-RCLONE_REMOTE = 'r2:'
+BLOG_POSTS_DIR = Path(os.getenv('BLOG_POSTS_DIR'))
+LOCAL_WEBP_DIR = Path(os.getenv('LOCAL_WEBP_DIR'))
+OUTPUT_FILE = Path(os.getenv('OUTPUT_FILE'))
+R2_BUCKET = os.getenv('R2_BUCKET')
+R2_PREFIX = os.getenv('R2_PREFIX')
+R2_ACCOUNT_ID = os.getenv('R2_ACCOUNT_ID')
+RCLONE_REMOTE = os.getenv('RCLONE_REMOTE', 'r2:')
+
+R2_BASE_URL = f'https://{R2_ACCOUNT_ID}.r2.cloudflarestorage.com/{R2_BUCKET}/{R2_PREFIX}'
 
 #Check dirs
 LOCAL_WEBP_DIR.mkdir(parents=True, exist_ok=True)
