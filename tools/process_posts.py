@@ -88,7 +88,8 @@ def convert_to_webp(src_path: Path) -> Path:
     if not dest.exists() or (src_path.stat().st_mtime > dest.stat().st_mtime):
         try:
             subprocess.run([
-                'ffmpeg', '-y', '-v', 'error' '-i', str(src_path),
+                'ffmpeg', '-y',
+                '-v', 'error', '-i', str(src_path),
                 '-c:v', 'libwebp',
                 '-q:v', '90',
                 '-preset', 'photo',
