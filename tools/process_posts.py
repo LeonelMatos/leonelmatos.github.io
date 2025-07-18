@@ -64,11 +64,22 @@ def convert_to_webp(src_path: Path) -> Path:
     dest = LOCAL_WEBP_DIR / (src_path.stem + '.webp')
     #Only convert if destination doesn't exist or source is newer than destination
     if not dest.exists() or (src_path.stat().st_mtime > dest.stat().st_mtime):
-        subprocess.run([
-            'ffmpeg', '-y', '-i', str(src_path), '-compression-level', '6',
-            '-qscale', '80', str(dest)
-        ], check=True)
-        print(f"Converted {src_path} to webp")
+        try:
+            subprocess.run([
+                'ffmpeg', '-y', '-i', str(src_path),
+                '-c:v', 'libwebp',
+                '-q:v', '100',
+                '-preset', 'default',
+                '-compression_level', '0',
+                str(dest)
+            ], check=True)
+            print(f"Converted {src_path} to webp")
+        except subprocess.CalledProcessError as e:
+            print(f"Error: Error converting {src_path} to webp")
+            print(f"Exit code: {e.returncode}")
+            print(f"Output: {e.stdout.decode()}")
+            print(f"Error: {e.stderr.decode()}")
+            raise
     return dest
 
 #Upload local images to r2
@@ -148,7 +159,7 @@ def process_posts():
             slug = os.path.splitext(filename)[0]
             post_dir = filepath.parent
 
-            banner_image = post.metadada.get('image', '')
+            banner_image = post.metadata.get('image', '')
             if banner_image:
                 new_banner = process_image(banner_image, post_dir)
                 post.metadata['image'] = new_banner
