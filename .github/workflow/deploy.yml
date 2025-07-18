@@ -1,0 +1,63 @@
+name: Deploy Blog
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BLOG_POSTS_DIR: ${{ secrets.BLOG_POSTS_DIR }}
+      LOCAL_WEBP_DIR: ${{ secrets.LOCAL_WEBP_DIR }}
+      OUTPUT_FILE: ${{ secrets.OUTPUT_FILE }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+      R2_PREFIX: ${{ secrets.R2_PREFIX }}
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install python-frontmatter markdown beautifulsoup4 python-dotenv
+        sudo apt-get install ffmpeg
+        
+    - name: Configure rclone
+      run: |
+        mkdir -p ~/.config/rclone
+        echo "[r2]" >> ~/.config/rclone/rclone.conf
+        echo "type = s3" >> ~/.config/rclone/rclone.conf
+        echo "provider = Cloudflare" >> ~/.config/rclone/rclone.conf
+        echo "access_key_id = ${{ secrets.R2_ACCESS_KEY_ID }}" >> ~/.config/rclone/rclone.conf
+        echo "secret_access_key = ${{ secrets.R2_SECRET_ACCESS_KEY }}" >> ~/.config/rclone/rclone.conf
+        echo "endpoint = https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com" >> ~/.config/rclone/rclone.conf
+        
+    - name: Create directories
+      run: |
+        mkdir -p private/blogposts
+        mkdir -p public/webp
+        mkdir -p public/js/data
+        
+    - name: Copy blog posts (simulated)
+      run: |
+        # In real workflow, you might clone a private repo here
+        echo "Simulating blog post copy"
+        touch private/blogposts/sample.md
+        
+    - name: Process posts
+      run: |
+        python scripts/process_posts.py
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
