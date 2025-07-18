@@ -66,18 +66,17 @@ def convert_to_webp(src_path: Path) -> Path:
     if not dest.exists() or (src_path.stat().st_mtime > dest.stat().st_mtime):
         try:
             subprocess.run([
-                'ffmpeg', '-y', '-i', str(src_path),
+                'ffmpeg', '-y', '-v', 'error' '-i', str(src_path),
                 '-c:v', 'libwebp',
-                '-q:v', '100',
-                '-preset', 'default',
-                '-compression_level', '0',
+                '-q:v', '90',
+                '-preset', 'photo',
+                '-compression_level', '6',
+                '-lossless', '0',
                 str(dest)
-            ], check=True)
+            ], check=True, stderr=subprocess.PIPE)
             print(f"Converted {src_path} to webp")
         except subprocess.CalledProcessError as e:
             print(f"Error: Error converting {src_path} to webp")
-            print(f"Exit code: {e.returncode}")
-            print(f"Output: {e.stdout.decode()}")
             print(f"Error: {e.stderr.decode()}")
             raise
     return dest
