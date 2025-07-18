@@ -42,7 +42,7 @@ R2_ACCOUNT_ID = os.getenv('R2_ACCOUNT_ID')
 RCLONE_REMOTE = os.getenv('RCLONE_REMOTE', 'r2:')
 CACHE_FILE = Path(os.getenv('CACHE_FILE'))
 
-R2_BASE_URL = f'https://{R2_ACCOUNT_ID}.r2.cloudflarestorage.com/{R2_BUCKET}/{R2_PREFIX}'
+R2_BASE_URL = f'https://{R2_ACCOUNT_ID}.r2.dev/{R2_PREFIX}'
 
 
 #Check dirs
@@ -126,6 +126,8 @@ def process_image(image_path: str, post_dir: Path) -> str:
     if not local_path.exists():
         print(f"Error: Image not found: {local_path}")
         return image_path
+    
+    webp_path = convert_to_webp(local_path)
 
     #Generate key on content hash
     with open(webp_path, 'rb') as f:
@@ -135,8 +137,6 @@ def process_image(image_path: str, post_dir: Path) -> str:
     if key in uploaded_images_cache:
         print(f"Using cached image: {key}. File {local_path} not used")
         return uploaded_images_cache[key]
-
-    webp_path = convert_to_webp(local_path)
 
     url = upload_to_r2(webp_path, key)
     uploaded_images_cache[key] = url

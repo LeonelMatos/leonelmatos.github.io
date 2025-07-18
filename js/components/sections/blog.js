@@ -7,48 +7,29 @@ const tagColors = {
   default: 'bg-gray-100 text-gray-800'
 };
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "How to Configure and Use the DERP Emulator for PicoSystem on Linux",
-    excerpt: "Create an environment to try and test different retro games build for the PicoSystem",
-    date: "June 15, 2025",
-    tags: ["linux", "emulation", "picosystem"],
-    category: "GameDev Tools",
-    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/post3-banner.png",
-    content: `<p>Full content would go here...</p>`
-  },
-  {
-    id: 2,
-    title: "Roadside Picnic Game Development Insights",
-    excerpt: "Following the game development and insanity to build a 3D survival game based on the concepts from the book Roadside Picnic.",
-    date: "June 8, 2025",
-    tags: ["gamedev", "unity", "3d"],
-    category: "GameDev Projects",
-    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/webp/roadside_banner.webp",
-    content: `<p>Full content would go here...</p>`
-  },
-  {
-    id: 3,
-    title: "Watched Movies",
-    excerpt: "A list of all movies I've watched since 2022. Including tags and rating",
-    date: "July 13, 2025",
-    tags: ["movies", "list", "shows"],
-    category: "GameDev Tools",
-    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/webp/movies_banner.webp",
-    content: `<p>Full content would go here...</p>`
-  },
-  {
-    id: 4,
-    title: "My Essential Tool Stack for Game Development",
-    excerpt: "A curated list of tools that accelerate my development workflow and boost productivity",
-    date: "June 1, 2025",
-    tags: ["tools", "workflow", "productivity"],
-    category: "GameDev Tools",
-    image: "https://pub-a4b70c46df844f5898a5a6145cee21c9.r2.dev/webp/resources_banner.webp",
-    content: `<p>Full content would go here...</p>`
+let blogPosts = [];
+
+//Load posts from JSON
+export async function loadPosts() {
+  try {
+    const response = await fetch('../../public/js/data/posts.json');
+    blogPosts = await response.json();
+    console.log(`Loaded ${blogPosts.length} posts`)
   }
-];
+  catch(error){
+    console.error('Error loading posts: ', error);
+    //Fallback err
+    blogPosts = [{
+      id: 1,
+        title: "No Posts Loaded",
+        excerpt: "Couldn't load posts",
+        date: new Date().toLocaleDateString(),
+        tags: ["error"],
+        image: "",
+        content: `<p>Please check your network connection and try again.</p>`
+    }]
+  }
+}
 
 //Blog page cards on list view
 export const renderBlogList = () => {
@@ -119,9 +100,6 @@ export const renderBlogSection = () => {
               >
             </div>
             <div class="p-5">
-              <span class="text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                ${post.category}
-              </span>
               <h3 class="font-medium mt-1 mb-2 text-lg leading-tight text-neutral-900 dark:text-neutral-50">
                 ${post.title}
               </h3>
@@ -156,32 +134,14 @@ export const renderBlogPosts = () => {
           </div>
           <div class="p-6">
             <div class="flex justify-between items-start">
-              <div>
-                <span class="text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                  ${post.category}
-                </span>
-                <h2 class="text-2xl font-semibold mt-1 mb-3 text-neutral-900 dark:text-neutral-50">
-                  ${post.title}
-                </h2>
-              </div>
+              <h2 class="text-2xl font-semibold mt-1 mb-3 text-neutral-900 dark:text-neutral-50">
+                ${post.title}
+              </h2>
               <span class="text-sm text-neutral-500 dark:text-neutral-400">${post.date}</span>
             </div>
             
             <div class="prose dark:prose-invert max-w-none">
-              <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                ${post.excerpt}
-              </p>
-              <p class="text-neutral-700 dark:text-neutral-300">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, 
-                nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies 
-                nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, 
-                nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.
-              </p>
-              <p class="text-neutral-700 dark:text-neutral-300">
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
+              ${post.content}
             </div>
             
             <div class="mt-6 flex flex-wrap gap-2">

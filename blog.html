@@ -69,11 +69,11 @@
     import { renderHeader } from './js/components/ui/header.js';
     import { renderTopNavigation } from './js/components/ui/top-navigation.js';
     import { renderFooter } from './js/components/ui/footer.js';
-    import { renderBlogList } from './js/components/sections/blog.js';
+    import { loadPosts, renderBlogList } from './js/components/sections/blog.js';
     import BlogController from './js/controllers/blogController.js';
     import './js/darkmode.js';
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       // Render header and navigation
       const headerContainer = document.getElementById('headerContainer');
       if (headerContainer) {
@@ -83,6 +83,7 @@
       }
       
       // Render blog list
+      await loadPosts();
       const blogPostsContainer = document.getElementById('blogPostsContainer');
       if (blogPostsContainer) {
         blogPostsContainer.innerHTML = renderBlogList();

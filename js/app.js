@@ -3,7 +3,7 @@ import BlogController from './controllers/blogController.js';
 import { renderHeader } from './components/ui/header.js';
 import { renderTopNavigation } from './components/ui/top-navigation.js';
 import { renderNavigation } from './components/ui/navigation.js';
-import { renderBlogSection } from './components/sections/blog.js';
+import { loadPosts, renderBlogSection } from './components/sections/blog.js';
 import { renderProjectsSection } from './components/sections/projects.js';
 import { renderFooter } from './components/ui/footer.js';
 import './darkmode.js';
@@ -23,7 +23,9 @@ const elements = {
 };
 
 // Render UI components
-const renderUI = () => {
+const renderUI = async () => {
+    await loadPosts();
+
     if (elements.headerContainer) elements.headerContainer.innerHTML = renderHeader();
     if (elements.navigationContainer) elements.navigationContainer.innerHTML = renderNavigation();
     if (elements.blogContainer) elements.blogContainer.innerHTML = renderBlogSection();
